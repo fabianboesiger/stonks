@@ -1,9 +1,10 @@
 [package]
 name = "stonks"
+description = "Sets that allow borrowing while inserting data."
+repository = "https://github.com/fabianboesiger/stonks"
+readme = "README.md"
 version = "0.1.0"
 authors = ["fabianboesiger <boesiger.fabian@outlook.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
+license = "MIT"
+license-file = "LICENSE.txt"
