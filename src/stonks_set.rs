@@ -64,7 +64,7 @@ where
         }
     }
 
-    pub fn contains(&self, value: T) -> bool
+    pub fn contains(&self, value: &T) -> bool
     where
         T: PartialEq,
     {
@@ -78,41 +78,64 @@ mod tests {
 
     #[test]
     fn overflow() {
-        let stonks = StonksSet::with_capacity(2);
-        stonks.insert(1);
-        stonks.insert(2);
-        stonks.insert(3);
-        stonks.insert(4);
-        stonks.insert(5);
-        assert_eq!(stonks.len(), 5);
+        let set = StonksSet::with_capacity(2);
+        set.insert(1);
+        set.insert(2);
+        set.insert(3);
+        set.insert(4);
+        set.insert(5);
+        assert_eq!(set.len(), 5);
     }
 
     #[test]
     fn insert_while_borrowed() {
-        let stonks = StonksSet::with_capacity(10);
-        stonks.insert(1);
-        let first = stonks.get(&1);
-        stonks.insert(2);
+        let set = StonksSet::with_capacity(10);
+        set.insert(1);
+        let first = set.get(&1);
+        set.insert(2);
         assert_eq!(*first.unwrap(), 1);
     }
 
     #[test]
     fn contains_inserted() {
-        let stonks = StonksSet::with_capacity(10);
-        stonks.insert(1);
-        stonks.insert(2);
-        stonks.insert(3);
-        assert_eq!(stonks.contains(3), true);
-        assert_eq!(stonks.contains(4), false);
+        let set = StonksSet::with_capacity(10);
+        set.insert(1);
+        set.insert(2);
+        set.insert(3);
+        assert_eq!(set.contains(&3), true);
+        assert_eq!(set.contains(&4), false);
     }
 
     #[test]
     fn get_or_insert() {
-        let stonks = StonksSet::with_capacity(10);
-        stonks.insert(1);
-        stonks.insert(2);
-        stonks.insert(3);
-        assert_eq!(stonks.get_or_insert(3), stonks.get(&3).unwrap());
-        assert_eq!(*stonks.get_or_insert(4), 4);
+        let set = StonksSet::with_capacity(10);
+        set.insert(1);
+        set.insert(2);
+        set.insert(3);
+        assert_eq!(set.get_or_insert(3), set.get(&3).unwrap());
+        assert_eq!(*set.get_or_insert(4), 4);
+    }
+
+    #[test]
+    fn big_test() {
+        let set = StonksSet::with_capacity(1000);
+        for i in 0..100000 {
+            set.insert(i);
+        }
+        assert_eq!(set.len(), 100000);
+
+        let mut refs = Vec::new();
+        for i in 0..100000 {
+            refs.push(set.get(&i).unwrap());
+        }
+
+        for i in 100000..200000 {
+            set.insert(i);
+        }
+        assert_eq!(set.len(), 200000);
+
+        for i in 0..100000 {
+            assert_eq!(*refs[i], i);
+        }
     }
 }

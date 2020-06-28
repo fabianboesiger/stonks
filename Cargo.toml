@@ -1,10 +1,11 @@
 [package]
 name = "stonks"
-description = "Sets that allow borrowing while inserting data."
+description = "Sets that allow borrowing while inserting entries."
 repository = "https://github.com/fabianboesiger/stonks"
 readme = "README.md"
 version = "0.1.0"
 authors = ["fabianboesiger <boesiger.fabian@outlook.com>"]
 edition = "2018"
 license = "MIT"
-license-file = "LICENSE.txt"
+keywords = ["set", "mutability", "borrowing"]
+categories = ["data-structures"]
