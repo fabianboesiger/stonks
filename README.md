@@ -4,7 +4,7 @@
 
 This crate provides sets that allow borrowing while inserting entries.
 
-While inserting entries while referencing other entries in the same set is allowed, removing entries is not possible as it may invalidate references that are held to said data.
+While inserting entries despite referencing other entries in the same set is allowed, removing entries is not possible as it may invalidate references that are held to the entry that is removed.
 
 ## Example
 
