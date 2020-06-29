@@ -1,8 +1,8 @@
-use stonks::StonksSet;
+use stonks::Set;
 
 fn main() {
     // Our set doesn't need to be mutable.
-    let set = StonksSet::with_capacity(10);
+    let set = Set::new();
     // Insert some data.
     set.insert("hello");
     // We now have a refefence to the data we previously inserted.

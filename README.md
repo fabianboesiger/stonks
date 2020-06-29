@@ -32,14 +32,14 @@ fn main() {
 Using Stonks, we can do the following thanks to interior mutability:
 
 ```rust
-use stonks::StonksSet;
+use stonks::Set;
 
 fn main() {
     // Our set doesn't need to be mutable.
-    let set = StonksSet::with_capacity(10);
+    let set = Set::new();
     // Insert some data.
     set.insert("hello");
-    // We now have a refefence to the data we previously inserted.
+    // We now have a reference to the data we previously inserted.
     let hello = set.get(&"hello").unwrap();
     // We can insert more data despite holding a reference to it.
     set.insert("world");
